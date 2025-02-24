@@ -34,6 +34,9 @@ namespace LeaveManagementSystem.Web.Controllers
                 return NotFound();
             }
 
+            //Parameterization is important for preventing SQL Injection Attacks
+            //var leaveType = 'SELECT * FROM LeaveTypes where Id = @id';
+
             var leaveType = await _context.LeaveTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (leaveType == null)
