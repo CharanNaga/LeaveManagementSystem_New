@@ -100,6 +100,7 @@ namespace LeaveManagementSystem.Web.Controllers
             //}
             //return View(leaveType);
 
+            //adding custom validation and model state errors.
             //if (string.IsNullOrWhiteSpace(leaveTypeCreate.Name))
             //{
             //    ModelState.AddModelError(nameof(leaveTypeCreate.Name),"Name can't be empty");
@@ -128,7 +129,11 @@ namespace LeaveManagementSystem.Web.Controllers
             {
                 return NotFound();
             }
-            return View(leaveType);
+
+            //convert data model into view model
+            var viewData = _mapper.Map<LeaveTypeEditVM>(leaveType);
+            //return View(leaveType);
+            return View(viewData);
         }
 
         // POST: LeaveTypes/Edit/5
@@ -136,23 +141,52 @@ namespace LeaveManagementSystem.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,NumberOfDays")] LeaveType leaveType)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,Name,NumberOfDays")] LeaveType leaveType)
+        public async Task<IActionResult> Edit(int id, LeaveTypeEditVM leaveTypeEdit)
         {
-            if (id != leaveType.Id)
+            //if (id != leaveType.Id)
+            //{
+            //    return NotFound();
+            //}
+
+            if (id != leaveTypeEdit.Id)
             {
                 return NotFound();
             }
+
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        _context.Update(leaveType);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!LeaveTypeExists(leaveType.Id))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View(leaveType);
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var leaveType = _mapper.Map<LeaveType>(leaveTypeEdit);
                     _context.Update(leaveType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LeaveTypeExists(leaveType.Id))
+                    if (!LeaveTypeExists(leaveTypeEdit.Id))
                     {
                         return NotFound();
                     }
@@ -163,7 +197,7 @@ namespace LeaveManagementSystem.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(leaveType);
+            return View(leaveTypeEdit);
         }
 
         // GET: LeaveTypes/Delete/5
