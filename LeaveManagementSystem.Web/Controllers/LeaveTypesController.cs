@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LeaveManagementSystem.Web.Data;
 using LeaveManagementSystem.Web.Models.LeaveTypes;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LeaveManagementSystem.Web.Controllers
 {
@@ -98,6 +99,11 @@ namespace LeaveManagementSystem.Web.Controllers
             //    return RedirectToAction(nameof(Index));
             //}
             //return View(leaveType);
+
+            //if (string.IsNullOrWhiteSpace(leaveTypeCreate.Name))
+            //{
+            //    ModelState.AddModelError(nameof(leaveTypeCreate.Name),"Name can't be empty");
+            //}
 
             if (ModelState.IsValid)
             {
