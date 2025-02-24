@@ -62,7 +62,19 @@ namespace LeaveManagementSystem.Web.Controllers
                 return NotFound();
             }
 
-            return View(leaveType);
+            //convert data model into view model
+            //var viewData = new LeaveTypeReadOnlyVM
+            //{
+            //    Id = leaveType.Id,
+            //    Name = leaveType.Name,
+            //    Days = leaveType.NumberOfDays
+            //};
+
+            //convert data model into view model using AutoMapper
+            var viewData = _mapper.Map<LeaveTypeReadOnlyVM>(leaveType);
+
+            //return View(leaveType);
+            return View(viewData);
         }
 
         // GET: LeaveTypes/Create
