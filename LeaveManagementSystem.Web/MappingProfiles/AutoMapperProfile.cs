@@ -19,6 +19,12 @@ namespace LeaveManagementSystem.Web.MappingProfiles
                 dest=>dest.NumberOfDays,
                 opt=>opt.MapFrom(src => src.Days)
                 );
+
+            CreateMap<LeaveTypeEditVM, LeaveType>()
+                .ForMember(
+                dest => dest.NumberOfDays,
+                opt => opt.MapFrom(src => src.Days)
+                ).ReverseMap();
        }
     }
 }
