@@ -37,7 +37,7 @@ namespace LeaveManagementSystem.Web.Controllers
             //});
 
             //convert the data model into view model using AutoMapper
-            var viewData = _mapper.Map<List<IndexVM>>(data);
+            var viewData = _mapper.Map<List<LeaveTypeReadOnlyVM>>(data);
 
             //return the view model to the view.
             //return View(data);
