@@ -69,18 +69,18 @@ namespace LeaveManagementSystem.Web.Services
             await _context.SaveChangesAsync();
         }
 
-        private bool LeaveTypeExists(int id)
+        public bool LeaveTypeExists(int id)
         {
             return _context.LeaveTypes.Any(e => e.Id == id);
         }
 
-        private async Task<bool> CheckIfLeaveTypeNameAlreadyExists(string name)
+        public async Task<bool> CheckIfLeaveTypeNameAlreadyExists(string name)
         {
             var lowerCaseName = name.ToLower();
             return await _context.LeaveTypes.AnyAsync(l => l.Name.ToLower().Equals(lowerCaseName));
         }
 
-        private async Task<bool> CheckIfLeaveTypeNameAlreadyExistsForEdit(LeaveTypeEditVM leaveTypeEdit)
+        public async Task<bool> CheckIfLeaveTypeNameAlreadyExistsForEdit(LeaveTypeEditVM leaveTypeEdit)
         {
             var lowerCaseName = leaveTypeEdit.Name.ToLower();
             return await _context.LeaveTypes.AnyAsync(
