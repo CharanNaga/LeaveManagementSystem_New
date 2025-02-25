@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementSystem.Web.Services
 {
-    public class LeaveTypesService
+    public class LeaveTypesService : ILeaveTypesService
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -48,7 +48,7 @@ namespace LeaveManagementSystem.Web.Services
             var leaveType = await _context.LeaveTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if(leaveType != null)
+            if (leaveType != null)
             {
                 _context.Remove(leaveType);
                 await _context.SaveChangesAsync();
