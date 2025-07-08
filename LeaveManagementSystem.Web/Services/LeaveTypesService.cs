@@ -5,16 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementSystem.Web.Services
 {
-    public class LeaveTypesService : ILeaveTypesService
+    public class LeaveTypesService(ApplicationDbContext _context, IMapper _mapper) : ILeaveTypesService
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        public LeaveTypesService(ApplicationDbContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
         public async Task<List<LeaveTypeReadOnlyVM>> GetAll()
         {
             //var data = 'SELECT * FROM LeaveTypes';

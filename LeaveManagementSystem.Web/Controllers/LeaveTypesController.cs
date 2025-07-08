@@ -5,15 +5,9 @@ using LeaveManagementSystem.Web.Services;
 
 namespace LeaveManagementSystem.Web.Controllers
 {
-    public class LeaveTypesController : Controller
+    public class LeaveTypesController(ILeaveTypesService _leaveTypesService) : Controller
     {
-        private readonly ILeaveTypesService _leaveTypesService;
         private const string NameExistsValidationMessage = "This leave type already exists in Database";
-
-        public LeaveTypesController(ILeaveTypesService leaveTypesService)
-        {
-            _leaveTypesService = leaveTypesService;
-        }
 
         // GET: LeaveTypes
         public async Task<IActionResult> Index()
