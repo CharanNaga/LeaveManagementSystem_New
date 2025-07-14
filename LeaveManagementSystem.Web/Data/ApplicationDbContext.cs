@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementSystem.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -36,10 +36,10 @@ namespace LeaveManagementSystem.Web.Data
                     NormalizedName = "ADMINISTRATOR"
                 });
 
-            var hasher = new PasswordHasher<IdentityUser>();
-            builder.Entity<IdentityUser>().HasData(
+            var hasher = new PasswordHasher<ApplicationUser>();
+            builder.Entity<ApplicationUser>().HasData(
 
-                new IdentityUser
+                new ApplicationUser
                 {
                     Id = "C8E52E08-1D08-44DF-AE74-10E26E1B39E9",
                     Email = "admin@domain.com",
@@ -47,7 +47,10 @@ namespace LeaveManagementSystem.Web.Data
                     UserName = "admin@domain.com",
                     NormalizedUserName = "ADMIN@DOMAIN.COM",
                     PasswordHash = hasher.HashPassword(null,"a@min"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    FirstName="Default",
+                    LastName="Admin",
+                    DateOfBirth = new DateOnly(2000,04,27)
                 });
 
             builder.Entity<IdentityUserRole<string>>().HasData(
