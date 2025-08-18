@@ -45,6 +45,16 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            @* Displaying Role Information while opening Register Page *@
+            @foreach(var role in Model.RoleNames)
+            {
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="Input.RoleName" value="@role"/>
+                    <label class="form-check-label" asp-for="Input.RoleName">@role</label>
+
+                    <span asp-validation-for="Input.RoleName" class="text-danger"></span>
+                </div>
+            }
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
