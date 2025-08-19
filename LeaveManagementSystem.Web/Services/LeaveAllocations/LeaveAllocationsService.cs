@@ -32,5 +32,17 @@ namespace LeaveManagementSystem.Web.Services.LeaveAllocations
             }
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<LeaveAllocation>> GetAllocations(string employeeId)
+        {
+            var leaveAllocations = await _context.LeaveAllocations
+                .Include(l=>l.LeaveType)
+                .Include(e=>e.Employee)
+                .Include(p=>p.Period)
+                .Where(q => q.EmployeeId == employeeId)
+                .ToListAsync();
+
+            return leaveAllocations;
+        }
     }
 }
