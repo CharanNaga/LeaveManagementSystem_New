@@ -3,6 +3,6 @@
     public interface ILeaveAllocationsService
     {
         Task AllocateLeave(string employeeId);
-        Task<List<LeaveAllocation>> GetAllocations(string employeeId);
+        Task<List<LeaveAllocation>> GetAllocations();
     }
 }
